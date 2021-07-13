@@ -57,5 +57,9 @@ client.on('message', message => {
 	}
 });
 
+client.on('message', message => {
+	console.log(message.channel + " | " + message.author + ":  " + message.content);
+});
+
 // login to Discord with your app's token
 client.login(token);
