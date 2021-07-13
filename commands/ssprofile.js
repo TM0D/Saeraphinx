@@ -3,18 +3,55 @@ module.exports = {
     description: 'show a players scoresaber info',
     execute(message, args) {
         if (!args.length) {
-            return message.channel.send(`You didn't provide any arguments, ${message.author}!`);
+            return message.channel.send(`You didn't provide any information, ${message.author}!`);
         }
+
+
         userID = args[0];
 
 
-        callAPI(args[0]);
+        callAPIUserInfo(args[0]);
+
+
+// -------------------------------------------------------------------------
+
+function callAPISearchUser(search){
+    console.log(Date.now() + ": Calling ScoreSaber API");
+  const http = require("https")
+  http.request(
+      {
+        hostname: "new.scoresaber.com",
+        path: "/api/players/by-name" + search,
+      },
+      res => {
+        let data = ""
+  
+        res.on("data", d => {
+          data += d
+        })
+        res.on("end", () => {
+         console.log(ss = data);
+         console.log(Date.now() + ": Completed API Call, Status: " + res.statusCode);
+         if (res.statusCode = 200) {
+         ssStatus = res.statusCode;
+         outEMBEDDATA();
+        } else {
+            message.channel.send("API Error - Try again.");
+        }
+        })
+      })
+    .end()
+  }
+
+
+
+
 
 
 
         var ssStatus;
         var ss;
-        function callAPI(ssID){
+        function callAPIUserInfo(ssID){
             console.log(Date.now() + ": Calling ScoreSaber API (callAPI())");
           const http = require("https")
           http.request(
@@ -35,7 +72,7 @@ module.exports = {
                  ssStatus = res.statusCode;
                  outEMBEDDATA();
                 } else {
-                  console.log("No Response, holding data and waiting.");
+                    message.channel.send("API Error - Try again.");
                 }
                 })
               })
