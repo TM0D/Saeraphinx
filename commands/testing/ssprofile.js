@@ -1,6 +1,7 @@
 module.exports = {
     name: 'ss',
     description: 'show a players scoresaber info',
+    args : true,
     execute(message, args) {
         if (!args.length) {
             return message.channel.send(`You didn't provide any information, ${message.author}!`);

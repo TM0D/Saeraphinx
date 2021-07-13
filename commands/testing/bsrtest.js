@@ -1,6 +1,7 @@
 module.exports = {
 	name: 'bsr',
 	description: 'Open OneClick w/ BSR',
+    args : true,
 	execute(message, args) {
         const open = require('open');
 		if (!args.length) {
