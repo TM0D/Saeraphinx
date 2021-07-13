@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/TM0D/Saeraphinx#readme",
   "dependencies": {
-    "discord.js": "^12.5.3"
+    "discord.js": "^12.5.3",
+    "open": "^8.2.1"
   }
 }
