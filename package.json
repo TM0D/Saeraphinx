@@ -1,0 +1,22 @@
+{
+  "name": "saeraphinx",
+  "version": "1.0.0",
+  "description": "discord bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TM0D/Saeraphinx.git"
+  },
+  "author": "TM0D",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TM0D/Saeraphinx/issues"
+  },
+  "homepage": "https://github.com/TM0D/Saeraphinx#readme",
+  "dependencies": {
+    "discord.js": "^12.5.3"
+  }
+}
