@@ -5,7 +5,7 @@ module.exports = {
         if (!args.length) {
             return message.channel.send(`You didn't provide any arguments, ${message.author}!`);
         }
-
+        userID = args[0];
 
 
         callAPI(args[0]);
@@ -33,7 +33,7 @@ module.exports = {
                  console.log(Date.now() + ": Completed API Call, Status: " + res.statusCode);
                  if (res.statusCode = 200) {
                  ssStatus = res.statusCode;
-                 outDATA();
+                 outEMBEDDATA();
                 } else {
                   console.log("No Response, holding data and waiting.");
                 }
@@ -44,6 +44,34 @@ module.exports = {
 
           function outRAWDATA() {
             return message.channel.send(`STATUS CODE: ` + ssStatus + `\nSCORESABER JSON: \n${ss}`);
+          }
+
+
+          function outEMBEDDATA() {
+            const Discord = require('discord.js');
+              const ssData = JSON.parse(ss);
+            let ssAcc = ssData.scoreStats.averageRankedAccuracy;
+            ssAcc = ssAcc * 1000;
+            ssAcc = (parseInt(ssAcc)) / 1000
+
+            const exampleEmbed = new Discord.MessageEmbed()
+            	.setColor('#ffde1a')
+            	.setTitle(ssData.playerInfo.playerName)
+            	.setURL('https://new.scoresaber.com/u/' + ssData.playerInfo.playerId)
+            	.setAuthor('ScoreSaber', 'https://scoresaber.com/imports/images/logo.ico', 'https://scoresaber.com')
+            	.setThumbnail('https://new.scoresaber.com' + ssData.playerInfo.avatar)
+            	.addFields(
+            		{ name: 'Global Rank', value: '#' + ssData.playerInfo.rank, inline: true },
+            		{ name: 'Country Rank', value: '#' + ssData.playerInfo.rank, inline: true },
+                    { name: 'Preformance Points', value: ssData.playerInfo.pp + "pp", inline: true },
+                    { name: 'Total Play Count', value: ssData.scoreStats.totalPlayCount, inline: true },
+            		{ name: 'Ranked Play Count', value: ssData.scoreStats.rankedPlayCount, inline: true },
+                    { name: 'Average Ranked Accuracy', value: ssAcc + "%", inline: true },
+            	)
+            	.setTimestamp()
+            	.setFooter('User ID: ' + ssData.playerInfo.playerId);
+            
+            message.channel.send(exampleEmbed);
           }
     }
 }
