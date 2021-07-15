@@ -105,3 +105,5 @@ dist
 
 #hide config
 config.json
+
+old/
