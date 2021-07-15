@@ -16,24 +16,55 @@ for (const folder of commandFolders) {
 	}
 }
 
-client.once('ready', () => {
+const webhookChannelID = '865275610439352372'
+client.once('ready', async () => {
 	console.log(`Logged in as ${client.user.tag}.`);
 	console.log('Ready!');
 });
 
 // -----
+const NewMessageLogger = require(`./special/logNM.js`);
+const DeletedMessageLogger = require(`./special/logDM.js`);
 
-client.on('message', message => {
-	console.log(message.channel + " | " + message.author + ":  " + message.content);
+client.once('ready', async () => {
+const hookChannel = client.channels.cache.get(webhookChannelID);
+	const Testwebhooks = await hookChannel.fetchWebhooks();
+	if (!Testwebhooks.first()) {
+		hookChannel.createWebhook('Logger', {
+		avatar: 'https://i.imgur.com/wSTFkRM.png',
+	}).then(webhook => console.log(`Created webhook ${webhook}`))
+	.catch(console.error); }
 });
 
-// -----
+client.on('message', async message => {
+	if (message.webhookID && message.channel.id == webhookChannelID) return;
+	console.log(message.channel + " | " + message.author + ":  " + message.content);
+	if (message.author.bot) return;
+	if (!message.guild.available) return;
+	const hookChannel = client.channels.cache.get(webhookChannelID);
+	const logWebhooks = await hookChannel.fetchWebhooks();
+	const logWebhook = logWebhooks.first();
+	NewMessageLogger.execute(message, logWebhook);
+});
 
+client.on('messageDelete', async message => {
+	if (message.webhookID && message.channel.id == webhookChannelID) return;
+	console.log(message.channel + " | " + message.author + ":  " + message.content);
+	if (message.author.bot) return;
+	if (!message.guild.available) return;
+	const hookChannel = client.channels.cache.get(webhookChannelID);
+	const logWebhooks = await hookChannel.fetchWebhooks();
+	const logWebhook = logWebhooks.first();
+	DeletedMessageLogger.execute(message, logWebhook);
+});
+// -----
 
 
 
 client.on('message', message => {
 	if (!message.content.startsWith(prefix) || message.author.bot) return;
+	if (message.webhookID) return;
+
 
 	const args = message.content.slice(prefix.length).trim().split(/ +/);
 	const commandName = args.shift().toLowerCase();
