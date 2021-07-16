@@ -1,5 +1,6 @@
 module.exports = {
     name: 'ssprofile',
+    aliases: ['ss'],
     description: 'show a players scoresaber info',
     args : false,
     execute(message, args) {
@@ -82,7 +83,7 @@ module.exports = {
             	.setThumbnail('https://new.scoresaber.com' + ssData.playerInfo.avatar)
             	.addFields(
             		{ name: 'Global Rank', value: '#' + ssData.playerInfo.rank, inline: true },
-            		{ name: 'Country Rank', value: '#' + ssData.playerInfo.rank, inline: true },
+            		{ name: 'Country Rank', value: '#' + ssData.playerInfo.countryRank, inline: true },
                     { name: 'Preformance Points', value: ssData.playerInfo.pp + "pp", inline: true },
                     { name: 'Total Play Count', value: ssData.scoreStats.totalPlayCount, inline: true },
             		{ name: 'Ranked Play Count', value: ssData.scoreStats.rankedPlayCount, inline: true },
