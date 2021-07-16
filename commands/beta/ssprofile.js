@@ -1,5 +1,5 @@
 module.exports = {
-    name: 'ss',
+    name: 'ssprofile',
     description: 'show a players scoresaber info',
     args : true,
     execute(message, args) {
