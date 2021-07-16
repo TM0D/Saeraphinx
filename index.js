@@ -20,7 +20,6 @@ client.once('ready', async () => {
 	console.log(`Logged in as ${client.user.tag}.`);
     if (dev) {
 		client.user.setPresence({ activity: { name: 'Saera devolve into insanity', type: "WATCHING" }, status: 'dnd' });
-		client.user.setStatus('dnd');
 	} else {
 		client.user.setPresence({ activity: { name: 'everything.', type: "WATCHING" }, status: 'dnd' });
 	}
