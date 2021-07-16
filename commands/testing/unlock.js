@@ -11,6 +11,6 @@ module.exports = {
         }
 
         lockedChannel.updateOverwrite(lockedChannel.guild.roles.everyone, { SEND_MESSAGES: true }, "Unlocked by " + message.author.username);
-        return message.reply("Unlocked " + lockedChannel)
+        return message.reply("Unlocked <#" + lockedChannel + ">")
     }
 }
