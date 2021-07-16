@@ -1,6 +1,6 @@
 const fs = require('fs');
 const Discord = require('discord.js');
-const { prefix, token } = require('./config.json');
+const { prefix, token, dev, webhookChannelID } = require('./config.json');
 
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
@@ -16,15 +16,20 @@ for (const folder of commandFolders) {
 	}
 }
 
-const webhookChannelID = '865275610439352372'
 client.once('ready', async () => {
 	console.log(`Logged in as ${client.user.tag}.`);
+    if (dev) {
+		client.user.setPresence({ activity: { name: 'Saera devolve into insanity', type: "WATCHING" }, status: 'dnd' });
+		client.user.setStatus('dnd');
+	} else {
+		client.user.setPresence({ activity: { name: 'everything.', type: "WATCHING" }, status: 'dnd' });
+	}
 	console.log('Ready!');
 });
 
 // -----
-const NewMessageLogger = require(`./special/logNM.js`);
-const DeletedMessageLogger = require(`./special/logDM.js`);
+const NewMessageLogger = require(`./logging/logNM.js`);
+const DeletedMessageLogger = require(`./logging/logDM.js`);
 
 client.once('ready', async () => {
 const hookChannel = client.channels.cache.get(webhookChannelID);
