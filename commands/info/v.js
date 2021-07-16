@@ -10,11 +10,11 @@ module.exports = {
         }
 		switch (mode) {
             case 1:
-                return message.channel.send("Current Version: `CUTE v0.1`")
+                return message.channel.send("Saeraphinx Current Version: `CUTE v0.1`")
                 break;
             case 0:
             default:
-                return message.channel.send("Current Version: `UNKNOWN` (dev version?)");
+                return message.channel.send("Saeraphinx Current Version: `UNKNOWN` (dev version?)");
                 break;
         }
 	},

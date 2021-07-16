@@ -9,6 +9,11 @@ client.cooldowns = new Discord.Collection();
 const commandFolders = fs.readdirSync('./commands');
 
 for (const folder of commandFolders) {
+	if (!dev) {
+		if(folder == "testing") {
+			continue;
+		}
+	}
 	const commandFiles = fs.readdirSync(`./commands/${folder}`).filter(file => file.endsWith('.js'));
 	for (const file of commandFiles) {
 		const command = require(`./commands/${folder}/${file}`);
@@ -84,7 +89,7 @@ client.on('message', message => {
 
 	if (command.permissions) {
 		const authorPerms = message.channel.permissionsFor(message.author);
-		if (!authorPerms || !authorPerms.has(command.permissions)) {
+		if (!authorPerms || !authorPerms.has(command.permissions, true)) { //maybe issue if crash
 			return message.reply('You can not do this!');
 		}
 	}

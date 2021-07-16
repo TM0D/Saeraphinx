@@ -3,11 +3,13 @@ const Discord = require('discord.js');
 module.exports = {
 	execute(message, webhook) {
         const embed = new Discord.MessageEmbed()
-	.setTitle(message.content)
+	.setDescription(message.content)
+	.setTitle("URL to message")
+	.setURL(message.url)
 	.setColor('#0099ff')
     .setAuthor(message.author.username, message.author.avatarURL())
     .setTimestamp()
-	.setFooter("USER ID: " + message.author.id, message.guild.iconURL());
+	.setFooter("User ID: " + message.author.id + " | Channel ID: " + message.channel, message.guild.iconURL());
 
 		    webhook.send('', {
 			username: 'MESSAGE',
