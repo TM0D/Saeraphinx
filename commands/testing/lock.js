@@ -1,3 +1,5 @@
+const { TextChannel } = require("discord.js");
+
 module.exports = {
     name: 'lock',
     description: 'Locks current channel, or locks channel mentioned',
@@ -7,7 +9,7 @@ module.exports = {
         if (!args.length) {
             unlockedChannel = message.channel;
         } else {
-            unlockedChannel = args[0];
+            lockedChannel = args[0];
         }
 
         unlockedChannel.updateOverwrite(unlockedChannel.guild.roles.everyone, { SEND_MESSAGES: false }, "Locked by " + message.author.username);
