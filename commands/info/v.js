@@ -5,7 +5,7 @@ module.exports = {
 	description: 'display version info',
     args : false,
 	execute(message, args) { 
-        if(message.author == author || message.botAdmin == botAdmin) {
+        if(message.author == author || message.author == botAdmin) {
             message.channel.send("Bot Admin:\nDEV MODE: `" + dev + "`\nINTENDED SERVER: `" + mode + "`")
         }
 		switch (mode) {

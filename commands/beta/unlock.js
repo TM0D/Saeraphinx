@@ -2,7 +2,7 @@ module.exports = {
     name: 'unlock',
     description: 'Unlocks current channel, or unlocks channel mentioned',
     args : false,
-    permissions : { MANAGE_CHANNEL: true },
+    permissions : 16,
     execute(message, args) {
         var lockedChannel;
         if (!args.length) {
