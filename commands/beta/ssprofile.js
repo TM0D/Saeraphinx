@@ -40,7 +40,7 @@ module.exports = {
           const http = require("https")
           http.request(
               {
-                hostname: "new.scoresaber.com",
+                hostname: "scoresaber.com",
                 path: "/api/player/" + ssID + "/full",
               },
               res => {
@@ -72,25 +72,25 @@ module.exports = {
             const Discord = require('discord.js');
               const ssData = JSON.parse(ss);
             let ssAcc = ssData.scoreStats.averageRankedAccuracy;
-            ssAcc = ssAcc * 1000;
-            ssAcc = (parseInt(ssAcc)) / 1000
+            //ssAcc = ssAcc * 1000;
+            //ssAcc = (parseInt(ssAcc)) / 1000
 
             const exampleEmbed = new Discord.MessageEmbed()
             	.setColor('#ffde1a')
-            	.setTitle(ssData.playerInfo.playerName)
-            	.setURL('https://new.scoresaber.com/u/' + ssData.playerInfo.playerId)
+            	.setTitle(ssData.playerName)
+            	.setURL('https://new.scoresaber.com/u/' + ssData.playerId)
             	.setAuthor('ScoreSaber', 'https://scoresaber.com/imports/images/logo.ico', 'https://scoresaber.com')
-            	.setThumbnail('https://new.scoresaber.com' + ssData.playerInfo.avatar)
+            	.setThumbnail('https://new.scoresaber.com' + ssData.profilePicture)
             	.addFields(
-            		{ name: 'Global Rank', value: '#' + ssData.playerInfo.rank, inline: true },
-            		{ name: 'Country Rank', value: '#' + ssData.playerInfo.countryRank, inline: true },
-                    { name: 'Preformance Points', value: ssData.playerInfo.pp + "pp", inline: true },
-                    { name: 'Total Play Count', value: ssData.scoreStats.totalPlayCount, inline: true },
-            		{ name: 'Ranked Play Count', value: ssData.scoreStats.rankedPlayCount, inline: true },
-                    { name: 'Average Ranked Accuracy', value: ssAcc + "%", inline: true },
+            		{ name: 'Global Rank',             value: '#' + ssData.rank, inline: true },
+            		{ name: 'Country Rank',            value: '#' + ssData.countryRank, inline: true },
+                { name: 'Preformance Points',      value: ssData.pp + "pp", inline: true },
+                { name: 'Total Play Count',        value: ssData.scoreStats.totalPlayCount, inline: true },
+            		{ name: 'Ranked Play Count',       value: ssData.scoreStats.rankedPlayCount, inline: true },
+                { name: 'Average Ranked Accuracy', value: ssAcc + "%", inline: true },
             	)
             	.setTimestamp()
-            	.setFooter('User ID: ' + ssData.playerInfo.playerId);
+            	.setFooter('User ID: ' + ssData.playerId);
             
             message.channel.send(exampleEmbed);
           }
@@ -127,8 +127,8 @@ module.exports = {
             const http = require("https")
             http.request(
                 {
-                  hostname: "new.scoresaber.com",
-                  path: "/api/players/by-name/" + search,
+                  hostname: "scoresaber.com",
+                  path: "/api/players?search=" + search,
                 },
                 res => {
                   let data = ""
