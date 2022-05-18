@@ -78,9 +78,9 @@ module.exports = {
             const exampleEmbed = new Discord.MessageEmbed()
             	.setColor('#ffde1a')
             	.setTitle(ssData.playerName)
-            	.setURL('https://new.scoresaber.com/u/' + ssData.playerId)
+            	.setURL('https://scoresaber.com/u/' + ssData.playerId)
             	.setAuthor('ScoreSaber', 'https://scoresaber.com/imports/images/logo.ico', 'https://scoresaber.com')
-            	.setThumbnail('https://new.scoresaber.com' + ssData.profilePicture)
+            	.setThumbnail('https://scoresaber.com' + ssData.profilePicture)
             	.addFields(
             		{ name: 'Global Rank',             value: '#' + ssData.rank, inline: true },
             		{ name: 'Country Rank',            value: '#' + ssData.countryRank, inline: true },
@@ -168,7 +168,7 @@ module.exports = {
               const searchEmbed = new Discord.MessageEmbed()
                 .setColor('#ffde1a')
                 .setTitle("ScoreSaber Player Search")
-                .setURL('https://new.scoresaber.com/rankings/search/' + args[0])
+                .setURL('https://scoresaber.com/rankings/search/' + args[0])
                 .setAuthor('ScoreSaber', 'https://scoresaber.com/imports/images/logo.ico', 'https://scoresaber.com')
                 .setTimestamp()
                 .setFooter("Choose your user ID and run !ssprofile <UserID>")
